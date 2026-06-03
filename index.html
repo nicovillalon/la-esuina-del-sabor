@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1357,23 +1356,40 @@
       setTimeout(() => document.getElementById("input-direccion").style.borderColor = "", 2000);
       return;
     }
-    let msg = "🍽️ *Pedido — La Esquina del Sabor*\n\n";
-    Object.values(carrito).forEach(i => { msg += `• ${i.nombre} x${i.cant} — ${fmt(i.precio * i.cant)}\n`; });
-    msg += `\n💰 *Total: ${fmt(total())}*`;
-    msg += `\n📦 *Entrega: ${tipoEntrega === "delivery" ? "Delivery 🛵" : "Retiro en local 🏪"}*`;
-    if (tipoEntrega === "delivery" && dir) msg += `\n📍 *Dirección: ${dir}*`;
-    if (tipoEntrega === "delivery" && ubicacionLink) msg += `\n🗺️ *Ubicación GPS: ${ubicacionLink}*`;
-    const pagoTexto = { efectivo: "💵 Efectivo", transferencia: "📱 Transferencia bancaria", mercadopago: "🟦 Mercado Pago" };
-    msg += `\n💳 *Pago: ${pagoTexto[tipoPago]}*`;
+    let msg = "";
+    msg += `🏪 *LA ESQUINA DEL SABOR*\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `🛒 *NUEVO PEDIDO*\n\n`;
+
+    Object.values(carrito).forEach(i => {
+      msg += `${i.emoji} ${i.nombre}\n`;
+      msg += `   cantidad: ${i.cant}  •  ${fmt(i.precio * i.cant)}\n\n`;
+    });
+
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `💰 *TOTAL: ${fmt(total())}*\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+    msg += `📦 *Entrega:* ${tipoEntrega === "delivery" ? "Delivery 🛵" : "Retiro en local 🏪"}\n`;
+    if (tipoEntrega === "delivery" && dir) msg += `📍 *Dirección:* ${dir}\n`;
+    if (tipoEntrega === "delivery" && ubicacionLink) msg += `🗺️ *Ubicación GPS:* ${ubicacionLink}\n`;
+
+    msg += `\n💳 *Pago:* `;
+    if (tipoPago === "efectivo")       msg += `Efectivo 💵\n`;
+    if (tipoPago === "transferencia")  msg += `Transferencia bancaria 📱\n`;
+    if (tipoPago === "mercadopago")    msg += `Mercado Pago 🟦\n`;
+
     if (tipoPago === "transferencia") {
-      msg += `\n\n🏦 *Datos para transferir:*`;
-      msg += `\n👤 Titular: Nicolas Villalon`;
-      msg += `\n🔑 Alias: nicolasvillalon`;
-      msg += `\n🔢 CBU: CBU_DE_NICOLAS`;
-      msg += `\n💰 Monto exacto: ${fmt(total())}`;
-      msg += `\n\n_Por favor enviá el comprobante por este chat_ 📎`;
+      msg += `\n┌─ 🏦 *DATOS PARA TRANSFERIR* ─┐\n`;
+      msg += `👤 Titular: Nicolas Villalon\n`;
+      msg += `🔑 Alias: nicolasvillalon\n`;
+      msg += `🔢 CBU: CBU_DE_NICOLAS\n`;
+      msg += `💰 Monto exacto: *${fmt(total())}*\n`;
+      msg += `└──────────────────────────┘\n`;
+      msg += `\n📎 _Enviá el comprobante por este chat para confirmar tu pedido_\n`;
     }
-    msg += "\n\n_Pedido enviado desde la carta digital_ ✅";
+
+    msg += `\n✅ _Pedido enviado desde la carta digital_`;
     window.open(`https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
