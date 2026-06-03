@@ -555,6 +555,42 @@
 
   #campo-direccion input:focus { border-color: var(--rojo); }
 
+  .btn-ubicacion {
+    width: 100%;
+    margin-top: 8px;
+    background: var(--blanco);
+    border: 2px solid var(--rojo);
+    border-radius: 10px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--rojo);
+    transition: all 0.2s;
+  }
+
+  .btn-ubicacion:active { background: #fff0f3; transform: scale(0.98); }
+  .btn-ubicacion.cargando { color: var(--gris); border-color: var(--gris); }
+  .btn-ubicacion.ok { color: #1a7a3f; border-color: #1a7a3f; background: #e8f8ef; }
+
+  #ubic-preview {
+    margin-top: 8px;
+    background: #e8f8ef;
+    border: 1px solid #b7dfca;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #1a7a3f;
+    display: none;
+    line-height: 1.5;
+  }
+
+  #ubic-preview.visible { display: block; }
+
   /* Pago */
   .pago-opciones { display: flex; flex-direction: column; gap: 8px; }
 
@@ -1072,6 +1108,11 @@
         </div>
         <div id="campo-direccion" class="visible">
           <input type="text" id="input-direccion" placeholder="📍 Ingresá tu dirección" />
+          <button class="btn-ubicacion" id="btn-ubicacion" onclick="obtenerUbicacion()">
+            <span id="ubic-icon">📍</span>
+            <span id="ubic-texto">Usar mi ubicación actual</span>
+          </button>
+          <div id="ubic-preview"></div>
         </div>
       </div>
 
@@ -1209,6 +1250,13 @@
     if (!e || e.target === document.getElementById("overlay")) {
       document.getElementById("overlay").classList.remove("visible");
       document.body.style.overflow = "";
+      // Resetear ubicación
+      ubicacionLink = "";
+      const btn = document.getElementById("btn-ubicacion");
+      if (btn) { btn.classList.remove("ok","cargando"); }
+      document.getElementById("ubic-icon").textContent = "📍";
+      document.getElementById("ubic-texto").textContent = "Usar mi ubicación actual";
+      document.getElementById("ubic-preview").classList.remove("visible");
     }
   }
 
@@ -1242,6 +1290,64 @@
     });
   }
 
+  // ── UBICACIÓN ──
+  let ubicacionLink = "";
+
+  function obtenerUbicacion() {
+    const btn     = document.getElementById("btn-ubicacion");
+    const icono   = document.getElementById("ubic-icon");
+    const texto   = document.getElementById("ubic-texto");
+    const preview = document.getElementById("ubic-preview");
+
+    if (!navigator.geolocation) {
+      alert("Tu navegador no soporta geolocalización. Ingresá la dirección manualmente.");
+      return;
+    }
+
+    // Estado cargando
+    btn.classList.add("cargando");
+    icono.textContent = "⏳";
+    texto.textContent = "Obteniendo ubicación...";
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude.toFixed(6);
+        const lng = pos.coords.longitude.toFixed(6);
+
+        // Link de Google Maps
+        ubicacionLink = `https://maps.google.com/?q=${lat},${lng}`;
+
+        // Actualizar botón a estado OK
+        btn.classList.remove("cargando");
+        btn.classList.add("ok");
+        icono.textContent = "✅";
+        texto.textContent = "Ubicación obtenida";
+
+        // Mostrar preview
+        preview.classList.add("visible");
+        preview.innerHTML = `📍 <strong>Ubicación compartida</strong><br>
+          <a href="${ubicacionLink}" target="_blank" style="color:#1a7a3f;">
+            Ver en Google Maps
+          </a>`;
+
+        // Poner coordenadas en el input como fallback
+        document.getElementById("input-direccion").placeholder = "Ubicación GPS obtenida ✅";
+      },
+      (err) => {
+        btn.classList.remove("cargando");
+        icono.textContent = "📍";
+        texto.textContent = "Usar mi ubicación actual";
+
+        if (err.code === 1) {
+          alert("Permiso denegado. Activá la ubicación en tu celu o ingresá la dirección manualmente.");
+        } else {
+          alert("No se pudo obtener la ubicación. Ingresá la dirección manualmente.");
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }
+
   function confirmarPedido() {
     if (cant() === 0) return;
     const dir = document.getElementById("input-direccion").value.trim();
@@ -1256,6 +1362,7 @@
     msg += `\n💰 *Total: ${fmt(total())}*`;
     msg += `\n📦 *Entrega: ${tipoEntrega === "delivery" ? "Delivery 🛵" : "Retiro en local 🏪"}*`;
     if (tipoEntrega === "delivery" && dir) msg += `\n📍 *Dirección: ${dir}*`;
+    if (tipoEntrega === "delivery" && ubicacionLink) msg += `\n🗺️ *Ubicación GPS: ${ubicacionLink}*`;
     const pagoTexto = { efectivo: "💵 Efectivo", transferencia: "📱 Transferencia bancaria", mercadopago: "🟦 Mercado Pago" };
     msg += `\n💳 *Pago: ${pagoTexto[tipoPago]}*`;
     if (tipoPago === "transferencia") {
