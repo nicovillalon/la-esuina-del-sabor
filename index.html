@@ -20,12 +20,12 @@
       --border:    #2C3E4E;
       --success:   #3ECFA4;
       --danger:    #E05A5A;
+      --whatsapp:  #25D366;
       --radius:    14px;
       --radius-sm: 8px;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -42,430 +42,250 @@
       border-bottom: 1px solid var(--border);
       height: 68px;
       display: flex; align-items: center;
-      padding: 0 24px;
-      gap: 16px;
+      padding: 0 24px; gap: 16px;
     }
-
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 800;
-      color: var(--text);
-      white-space: nowrap;
-      letter-spacing: -0.5px;
-    }
+    .logo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; white-space:nowrap; letter-spacing:-0.5px; }
     .logo span { color: var(--accent); }
 
-    /* barra de búsqueda */
-    .search-wrap {
-      flex: 1; max-width: 520px; margin: 0 auto;
-      position: relative;
-    }
+    .search-wrap { flex:1; max-width:520px; margin:0 auto; position:relative; }
     .search-wrap input {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      height: 42px;
-      padding: 0 48px 0 48px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color .2s;
+      width:100%; background:var(--bg-card); border:1px solid var(--border);
+      border-radius:100px; height:42px; padding:0 48px 0 44px;
+      color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none;
+      transition:border-color .2s;
     }
-    .search-wrap input::placeholder { color: var(--text-muted); }
-    .search-wrap input:focus { border-color: var(--accent); }
-
-    .search-icon {
-      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-      color: var(--text-muted); pointer-events: none;
-      font-size: 16px;
-    }
-
-    /* ícono que rota — la firma de diseño */
+    .search-wrap input::placeholder { color:var(--text-muted); }
+    .search-wrap input:focus { border-color:var(--accent); }
+    .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
     .search-tool {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      width: 26px; height: 26px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background .2s;
+      position:absolute; right:8px; top:50%; transform:translateY(-50%);
+      width:28px; height:28px; background:var(--accent); border-radius:6px;
+      display:flex; align-items:center; justify-content:center; font-size:14px;
+      cursor:pointer; transition:background .2s; user-select:none;
     }
-    .search-tool:hover { background: var(--accent2); }
+    .search-tool:hover { background:var(--accent2); }
 
-    .header-actions {
-      display: flex; align-items: center; gap: 12px;
-      white-space: nowrap;
-    }
-
+    .header-actions { display:flex; align-items:center; gap:10px; white-space:nowrap; }
     .btn-ghost {
-      background: none; border: 1px solid var(--border);
-      color: var(--text); border-radius: 100px;
-      padding: 8px 18px; font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: border-color .2s, background .2s;
+      background:none; border:1px solid var(--border); color:var(--text);
+      border-radius:100px; padding:8px 16px; font-size:13px; font-weight:500;
+      cursor:pointer; transition:border-color .2s, background .2s;
     }
-    .btn-ghost:hover { border-color: var(--accent); background: rgba(245,166,35,.06); }
-
+    .btn-ghost:hover { border-color:var(--accent); background:rgba(245,166,35,.06); }
     .btn-primary {
-      background: var(--accent); border: none;
-      color: #0F1923; border-radius: 100px;
-      padding: 8px 20px; font-size: 13px; font-weight: 600;
-      cursor: pointer; transition: background .2s;
+      background:var(--accent); border:none; color:#0F1923;
+      border-radius:100px; padding:8px 18px; font-size:13px; font-weight:600;
+      cursor:pointer; transition:background .2s;
     }
-    .btn-primary:hover { background: var(--accent2); }
+    .btn-primary:hover { background:var(--accent2); }
+    .btn-wsp {
+      background:var(--whatsapp); border:none; color:#fff;
+      border-radius:100px; padding:7px 14px; font-size:12px; font-weight:600;
+      cursor:pointer; transition:opacity .2s; display:flex; align-items:center; gap:5px;
+      text-decoration:none;
+    }
+    .btn-wsp:hover { opacity:.85; }
+    .btn-call {
+      background:var(--bg-card2); border:1px solid var(--border); color:var(--text);
+      border-radius:100px; padding:7px 14px; font-size:12px; font-weight:600;
+      cursor:pointer; transition:border-color .2s; display:flex; align-items:center; gap:5px;
+      text-decoration:none;
+    }
+    .btn-call:hover { border-color:var(--accent); color:var(--accent); }
 
     /* ── HERO ── */
     .hero {
-      padding: 60px 24px 48px;
-      max-width: 1080px; margin: 0 auto;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 16px;
+      padding:56px 24px 40px; max-width:1080px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center; gap:14px;
     }
-
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 800; line-height: 1.1;
-      letter-spacing: -1px;
-      color: var(--text);
-    }
-    .hero h1 em {
-      font-style: normal; color: var(--accent);
-    }
-
-    .hero-sub {
-      color: var(--text-muted);
-      font-size: 15px; max-width: 480px; line-height: 1.6;
-    }
-
-    /* barra dirección */
+    .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent); }
+    .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(30px,5vw,54px); font-weight:800; line-height:1.1; letter-spacing:-1px; }
+    .hero h1 em { font-style:normal; color:var(--accent); }
+    .hero-sub { color:var(--text-muted); font-size:15px; max-width:460px; line-height:1.6; }
     .location-bar {
-      display: flex; gap: 10px; align-items: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      width: 100%; max-width: 520px;
-      margin-top: 8px;
-      cursor: pointer;
-      transition: border-color .2s;
+      display:flex; gap:10px; align-items:center; background:var(--bg-card);
+      border:1px solid var(--border); border-radius:var(--radius);
+      padding:12px 16px; width:100%; max-width:500px; margin-top:6px;
+      cursor:pointer; transition:border-color .2s;
     }
-    .location-bar:hover { border-color: var(--accent); }
-    .location-bar .loc-icon { color: var(--accent); font-size: 18px; }
-    .location-bar .loc-text {
-      flex: 1;
-      font-size: 14px; color: var(--text-muted);
-    }
-    .location-bar .loc-cta {
-      font-size: 13px; font-weight: 600; color: var(--accent);
-    }
+    .location-bar:hover { border-color:var(--accent); }
+    .loc-icon { color:var(--accent); font-size:18px; }
+    .loc-text { flex:1; font-size:14px; color:var(--text-muted); }
+    .loc-cta { font-size:13px; font-weight:600; color:var(--accent); }
+    .trust { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+    .trust-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); }
+    .trust-item .dot { color:var(--success); }
 
-    /* trust badges */
-    .trust {
-      display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
-      margin-top: 8px;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 12px; color: var(--text-muted);
-    }
-    .trust-item .dot { color: var(--success); }
+    /* ── SECTION ── */
+    .section { max-width:1080px; margin:0 auto; padding:0 24px 48px; }
+    .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px; }
+    .section-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; }
+    .section-link { font-size:13px; color:var(--accent); font-weight:500; cursor:pointer; }
+    .section-link:hover { text-decoration:underline; }
 
-    /* ── SECCIÓN SERVICIOS ── */
-    .section {
-      max-width: 1080px; margin: 0 auto;
-      padding: 0 24px 48px;
-    }
-
-    .section-header {
-      display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 700;
-    }
-    .section-link {
-      font-size: 13px; color: var(--accent); font-weight: 500; cursor: pointer;
-    }
-    .section-link:hover { text-decoration: underline; }
-
-    /* grid de servicios */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .header-actions .btn-ghost { display: none; }
-    }
-    @media (max-width: 480px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    /* ── GRID SERVICIOS ── */
+    .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    @media(max-width:768px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
 
     .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 16px 18px;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 12px; text-align: center;
-      cursor: pointer;
-      transition: border-color .2s, transform .2s, background .2s;
-      position: relative; overflow: hidden;
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px 16px 18px;
+      display:flex; flex-direction:column; align-items:center;
+      gap:10px; text-align:center; cursor:pointer;
+      transition:border-color .2s, transform .2s, background .2s;
+      position:relative; overflow:hidden;
     }
     .service-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--card-color, var(--accent));
-      opacity: 0;
-      transition: opacity .2s;
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:var(--card-color, var(--accent)); opacity:0; transition:opacity .2s;
     }
-    .service-card:hover {
-      border-color: var(--card-color, var(--accent));
-      transform: translateY(-3px);
-      background: var(--bg-card2);
-    }
-    .service-card:hover::before { opacity: 1; }
-
+    .service-card:hover { border-color:var(--card-color, var(--accent)); transform:translateY(-3px); background:var(--bg-card2); }
+    .service-card:hover::before { opacity:1; }
     .service-icon {
-      width: 62px; height: 62px;
-      background: var(--icon-bg, rgba(245,166,35,.12));
-      border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
-      transition: transform .2s;
+      width:60px; height:60px; background:var(--icon-bg,rgba(245,166,35,.12));
+      border-radius:16px; display:flex; align-items:center; justify-content:center;
+      font-size:27px; transition:transform .2s;
     }
-    .service-card:hover .service-icon { transform: scale(1.1) rotate(-4deg); }
-
-    .service-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px; font-weight: 700;
-    }
-    .service-desc {
-      font-size: 12px; color: var(--text-muted); line-height: 1.5;
-    }
+    .service-card:hover .service-icon { transform:scale(1.1) rotate(-4deg); }
+    .service-name { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .service-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
     .service-badge {
-      background: rgba(62,207,164,.12);
-      color: var(--success);
-      border-radius: 100px;
-      padding: 3px 10px;
-      font-size: 11px; font-weight: 600;
+      background:rgba(62,207,164,.12); color:var(--success);
+      border-radius:100px; padding:3px 10px; font-size:11px; font-weight:600;
     }
-    .service-badge.urgent {
-      background: rgba(224,90,90,.12);
-      color: var(--danger);
-    }
+    .service-badge.urgent { background:rgba(224,90,90,.12); color:var(--danger); }
 
     /* ── SWIMLANE PROFESIONALES ── */
-    .swimlane {
-      display: flex; gap: 14px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      scrollbar-width: none;
-    }
-    .swimlane::-webkit-scrollbar { display: none; }
+    .swimlane { display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
+    .swimlane::-webkit-scrollbar { display:none; }
 
+    /* tarjeta pro — ahora más alta para los botones */
     .pro-card {
-      min-width: 200px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      cursor: pointer;
-      transition: border-color .2s, transform .2s;
-      flex-shrink: 0;
+      min-width:220px; background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:16px;
+      cursor:default; transition:border-color .2s, transform .2s;
+      flex-shrink:0; display:flex; flex-direction:column; gap:10px;
     }
-    .pro-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .pro-card:hover { border-color:var(--border); transform:translateY(-2px); }
+    .pro-card.nuevo { border-color:var(--accent); }
 
+    .pro-top { display:flex; align-items:center; gap:10px; }
     .pro-avatar {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: var(--bg-card2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 10px;
-      border: 2px solid var(--border);
+      width:46px; height:46px; border-radius:50%; background:var(--bg-card2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; border:2px solid var(--border); flex-shrink:0;
     }
-
-    .pro-name {
-      font-weight: 600; font-size: 14px; margin-bottom: 2px;
-    }
-    .pro-trade {
-      font-size: 12px; color: var(--text-muted); margin-bottom: 8px;
-    }
-    .pro-meta {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 12px;
-    }
-    .pro-stars { color: var(--accent); }
-    .pro-reviews { color: var(--text-muted); }
+    .pro-info { flex:1; min-width:0; }
+    .pro-name { font-weight:600; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pro-trade { font-size:12px; color:var(--text-muted); }
+    .pro-stars-row { display:flex; align-items:center; gap:6px; font-size:12px; }
+    .pro-stars { color:var(--accent); font-size:11px; }
+    .pro-reviews { color:var(--text-muted); }
     .pro-eta {
-      margin-left: auto;
-      background: rgba(62,207,164,.12);
-      color: var(--success);
-      border-radius: 6px; padding: 2px 8px;
-      font-size: 11px; font-weight: 600;
+      background:rgba(62,207,164,.12); color:var(--success);
+      border-radius:6px; padding:2px 8px; font-size:11px; font-weight:600;
+      white-space:nowrap;
     }
-    .pro-eta.far {
-      background: rgba(245,166,35,.1);
-      color: var(--accent);
+    .pro-eta.far { background:rgba(245,166,35,.1); color:var(--accent); }
+
+    .pro-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
+
+    .pro-actions { display:flex; gap:8px; margin-top:2px; }
+    .pro-actions a { flex:1; justify-content:center; font-size:12px; }
+
+    .badge-nuevo {
+      background:rgba(245,166,35,.15); color:var(--accent);
+      border-radius:4px; padding:2px 7px; font-size:10px; font-weight:700;
+      letter-spacing:.5px;
     }
 
     /* ── BANNER URGENCIAS ── */
-    .banner-urgencias {
-      max-width: 1080px; margin: 0 auto 48px;
-      padding: 0 24px;
-    }
+    .banner-urgencias { max-width:1080px; margin:0 auto 48px; padding:0 24px; }
     .banner-inner {
-      background: linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1C2A35 100%);
-      border: 1px solid var(--accent2);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      display: flex; align-items: center; gap: 24px;
-      flex-wrap: wrap;
+      background:linear-gradient(135deg,#1a0a00 0%,#2d1500 50%,#1C2A35 100%);
+      border:1px solid var(--accent2); border-radius:var(--radius);
+      padding:28px 32px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
     }
-    .banner-icon { font-size: 42px; }
-    .banner-text { flex: 1; }
-    .banner-text h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 700; margin-bottom: 6px;
-    }
-    .banner-text p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-    .banner-text strong { color: var(--accent); }
+    .banner-icon { font-size:40px; }
+    .banner-text { flex:1; }
+    .banner-text h3 { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; margin-bottom:6px; }
+    .banner-text p { font-size:13px; color:var(--text-muted); line-height:1.5; }
+    .banner-text strong { color:var(--accent); }
 
     /* ── CÓMO FUNCIONA ── */
-    .how-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-    }
-    @media (max-width: 640px) { .how-grid { grid-template-columns: 1fr; } }
+    .how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    @media(max-width:640px){ .how-grid{grid-template-columns:1fr;} }
+    .how-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px 20px; }
+    .how-number { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--accent); opacity:.35; line-height:1; margin-bottom:12px; }
+    .how-card h4 { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; margin-bottom:6px; }
+    .how-card p { font-size:13px; color:var(--text-muted); line-height:1.6; }
 
-    .how-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px 20px;
+    /* ── CHIPS ── */
+    .chip-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:18px; scrollbar-width:none; }
+    .chip-bar::-webkit-scrollbar { display:none; }
+    .chip {
+      white-space:nowrap; background:var(--bg-card); border:1px solid var(--border);
+      border-radius:100px; padding:6px 16px; font-size:13px; font-weight:500;
+      cursor:pointer; transition:all .15s;
     }
-    .how-number {
-      font-family: 'Syne', sans-serif;
-      font-size: 36px; font-weight: 800;
-      color: var(--accent); opacity: .35;
-      line-height: 1; margin-bottom: 12px;
-    }
-    .how-card h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px; font-weight: 700; margin-bottom: 6px;
-    }
-    .how-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 2;
-    }
-    footer strong { color: var(--text); }
+    .chip:hover, .chip.active { background:var(--accent); border-color:var(--accent); color:#0F1923; }
 
     /* ── MODAL ── */
     .modal-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.7);
-      backdrop-filter: blur(4px);
-      z-index: 200;
-      align-items: center; justify-content: center;
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.75); backdrop-filter:blur(4px);
+      z-index:200; align-items:center; justify-content:center;
     }
-    .modal-overlay.open { display: flex; }
-
+    .modal-overlay.open { display:flex; }
     .modal {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      max-width: 420px; width: 90%;
-      animation: popIn .2s ease;
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:28px; max-width:460px; width:92%;
+      animation:popIn .2s ease;
     }
-    @keyframes popIn {
-      from { transform: scale(.94); opacity: 0; }
-      to   { transform: scale(1);   opacity: 1; }
-    }
+    @keyframes popIn { from{transform:scale(.94);opacity:0;} to{transform:scale(1);opacity:1;} }
+    .modal h3 { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin-bottom:6px; }
+    .modal-sub { font-size:13px; color:var(--text-muted); margin-bottom:20px; }
 
-    .modal h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 700; margin-bottom: 6px;
-    }
-    .modal p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media(max-width:480px){ .form-row{grid-template-columns:1fr;} }
 
-    .modal-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      outline: none;
-      margin-bottom: 12px;
-      transition: border-color .2s;
+    .field { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
+    .field label { font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
+    .field input, .field select, .field textarea {
+      background:var(--bg); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:10px 12px;
+      color:var(--text); font-family:'Inter',sans-serif; font-size:14px;
+      outline:none; transition:border-color .2s; width:100%;
     }
-    .modal-input:focus { border-color: var(--accent); }
+    .field input::placeholder, .field textarea::placeholder { color:var(--text-muted); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--accent); }
+    .field select { appearance:none; cursor:pointer; }
+    .field select option { background:var(--bg-card); }
+    .field textarea { resize:vertical; min-height:72px; }
 
-    .modal-footer {
-      display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px;
-    }
+    .modal-footer { display:flex; gap:10px; justify-content:flex-end; margin-top:16px; }
 
-    /* chip categoría activa */
-    .chip-bar {
-      display: flex; gap: 8px; overflow-x: auto;
-      padding-bottom: 4px; margin-bottom: 20px;
-      scrollbar-width: none;
-    }
-    .chip-bar::-webkit-scrollbar { display: none; }
-
-    .chip {
-      white-space: nowrap;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: all .15s;
-    }
-    .chip:hover, .chip.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0F1923;
-    }
-
-    /* toast */
+    /* ── TOAST ── */
     .toast {
-      position: fixed; bottom: 24px; right: 24px;
-      background: var(--bg-card2);
-      border: 1px solid var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 12px 18px;
-      font-size: 13px; color: var(--text);
-      z-index: 300;
-      display: none;
-      animation: slideUp .25s ease;
+      position:fixed; bottom:24px; right:24px;
+      background:var(--bg-card2); border:1px solid var(--accent);
+      border-radius:var(--radius-sm); padding:12px 18px;
+      font-size:13px; color:var(--text); z-index:300;
+      display:none; animation:slideUp .25s ease; max-width:320px;
     }
-    @keyframes slideUp {
-      from { transform: translateY(10px); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
+    @keyframes slideUp { from{transform:translateY(10px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top:1px solid var(--border); padding:32px 24px;
+      text-align:center; color:var(--text-muted); font-size:12px; line-height:2;
+    }
+    footer strong { color:var(--text); }
+
+    @media(max-width:768px){
+      .header-actions .btn-ghost { display:none; }
+      .hero { padding:40px 16px 32px; }
     }
   </style>
 </head>
@@ -474,16 +294,14 @@
 <!-- HEADER -->
 <header>
   <div class="logo">Servi<span>Hogar</span></div>
-
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
     <input type="text" id="searchInput" placeholder="Buscá un servicio o profesional…" oninput="handleSearch(this.value)"/>
-    <div class="search-tool" id="searchTool" title="Buscar">🔧</div>
+    <div class="search-tool" id="searchTool">🔧</div>
   </div>
-
   <div class="header-actions">
-    <button class="btn-ghost" onclick="openModal('login')">Ingresar</button>
-    <button class="btn-primary" onclick="openModal('register')">Publicar servicio</button>
+    <button class="btn-ghost" onclick="openModal('location')">📍 Mi zona</button>
+    <button class="btn-primary" onclick="openModal('agregar')">+ Publicar servicio</button>
   </div>
 </header>
 
@@ -492,13 +310,11 @@
   <p class="hero-eyebrow">✦ Servicios para el hogar en Córdoba</p>
   <h1>El profesional que<br/>necesitás, <em>ahora</em></h1>
   <p class="hero-sub">Cerrajeros, electricistas, plomeros y carpinteros verificados cerca tuyo. Sin intermediarios, sin vueltas.</p>
-
   <div class="location-bar" onclick="openModal('location')">
     <span class="loc-icon">📍</span>
     <span class="loc-text" id="locationText">¿Dónde necesitás el servicio?</span>
     <span class="loc-cta">Cambiar</span>
   </div>
-
   <div class="trust">
     <span class="trust-item"><span class="dot">●</span> +1.200 profesionales verificados</span>
     <span class="trust-item"><span class="dot">●</span> Respuesta en menos de 60 min</span>
@@ -510,62 +326,46 @@
 <section class="section">
   <div class="section-header">
     <h2 class="section-title">¿Qué necesitás?</h2>
-    <span class="section-link">Ver todos →</span>
+    <span class="section-link" onclick="clearFilter()">Ver todos →</span>
   </div>
-
   <div class="services-grid">
-    <div class="service-card" style="--card-color:#F5A623; --icon-bg:rgba(245,166,35,.12)" onclick="filterBy('cerrajeria')">
-      <div class="service-icon">🔑</div>
-      <div class="service-name">Cerrajería</div>
-      <div class="service-desc">Apertura de puertas, cambio de chapas, duplicado de llaves</div>
+    <div class="service-card" style="--card-color:#F5A623;--icon-bg:rgba(245,166,35,.12)" onclick="filterBy('cerrajeria')">
+      <div class="service-icon">🔑</div><div class="service-name">Cerrajería</div>
+      <div class="service-desc">Apertura de puertas, chapas, duplicado de llaves</div>
       <span class="service-badge urgent">Urgencias 24 hs</span>
     </div>
-
-    <div class="service-card" style="--card-color:#3ECFA4; --icon-bg:rgba(62,207,164,.12)" onclick="filterBy('electricidad')">
-      <div class="service-icon">⚡</div>
-      <div class="service-name">Electricidad</div>
+    <div class="service-card" style="--card-color:#3ECFA4;--icon-bg:rgba(62,207,164,.12)" onclick="filterBy('electricidad')">
+      <div class="service-icon">⚡</div><div class="service-name">Electricidad</div>
       <div class="service-desc">Instalaciones, tableros, iluminación, cortes de luz</div>
       <span class="service-badge">Disponible hoy</span>
     </div>
-
-    <div class="service-card" style="--card-color:#5B9BF5; --icon-bg:rgba(91,155,245,.12)" onclick="filterBy('plomeria')">
-      <div class="service-icon">🚿</div>
-      <div class="service-name">Plomería</div>
+    <div class="service-card" style="--card-color:#5B9BF5;--icon-bg:rgba(91,155,245,.12)" onclick="filterBy('plomeria')">
+      <div class="service-icon">🚿</div><div class="service-name">Plomería</div>
       <div class="service-desc">Pérdidas, destape de cañerías, instalación sanitaria</div>
       <span class="service-badge urgent">Urgencias 24 hs</span>
     </div>
-
-    <div class="service-card" style="--card-color:#C97A3A; --icon-bg:rgba(201,122,58,.12)" onclick="filterBy('carpinteria')">
-      <div class="service-icon">🪚</div>
-      <div class="service-name">Carpintería</div>
+    <div class="service-card" style="--card-color:#C97A3A;--icon-bg:rgba(201,122,58,.12)" onclick="filterBy('carpinteria')">
+      <div class="service-icon">🪚</div><div class="service-name">Carpintería</div>
       <div class="service-desc">Muebles a medida, reparaciones, puertas y marcos</div>
       <span class="service-badge">Programado</span>
     </div>
-
-    <div class="service-card" style="--card-color:#A78BFA; --icon-bg:rgba(167,139,250,.12)" onclick="filterBy('pintura')">
-      <div class="service-icon">🖌️</div>
-      <div class="service-name">Pintura</div>
+    <div class="service-card" style="--card-color:#A78BFA;--icon-bg:rgba(167,139,250,.12)" onclick="filterBy('pintura')">
+      <div class="service-icon">🖌️</div><div class="service-name">Pintura</div>
       <div class="service-desc">Interior, exterior, texturado, frentes y locales</div>
       <span class="service-badge">Disponible hoy</span>
     </div>
-
-    <div class="service-card" style="--card-color:#F472B6; --icon-bg:rgba(244,114,182,.12)" onclick="filterBy('gasista')">
-      <div class="service-icon">🔥</div>
-      <div class="service-name">Gasista</div>
+    <div class="service-card" style="--card-color:#F472B6;--icon-bg:rgba(244,114,182,.12)" onclick="filterBy('gasista')">
+      <div class="service-icon">🔥</div><div class="service-name">Gasista</div>
       <div class="service-desc">Instalación de artefactos, pérdidas, certificaciones</div>
       <span class="service-badge urgent">Urgencias 24 hs</span>
     </div>
-
-    <div class="service-card" style="--card-color:#34D399; --icon-bg:rgba(52,211,153,.12)" onclick="filterBy('jardineria')">
-      <div class="service-icon">🌿</div>
-      <div class="service-name">Jardinería</div>
+    <div class="service-card" style="--card-color:#34D399;--icon-bg:rgba(52,211,153,.12)" onclick="filterBy('jardineria')">
+      <div class="service-icon">🌿</div><div class="service-name">Jardinería</div>
       <div class="service-desc">Corte de césped, poda, diseño de jardines</div>
       <span class="service-badge">Disponible hoy</span>
     </div>
-
-    <div class="service-card" style="--card-color:#FB923C; --icon-bg:rgba(251,146,60,.12)" onclick="filterBy('albanileria')">
-      <div class="service-icon">🧱</div>
-      <div class="service-name">Albañilería</div>
+    <div class="service-card" style="--card-color:#FB923C;--icon-bg:rgba(251,146,60,.12)" onclick="filterBy('albanileria')">
+      <div class="service-icon">🧱</div><div class="service-name">Albañilería</div>
       <div class="service-desc">Reparaciones, revoques, construcción y reformas</div>
       <span class="service-badge">Programado</span>
     </div>
@@ -580,9 +380,7 @@
       <h3>¿Emergencia ahora mismo?</h3>
       <p>Cerrajeros, gasistas y plomeros disponibles <strong>las 24 horas</strong>, los 365 días del año. El profesional más cercano llega en <strong>menos de 45 minutos</strong>.</p>
     </div>
-    <button class="btn-primary" onclick="showToast('📞 Conectando con el profesional más cercano…')">
-      Solicitar urgente
-    </button>
+    <button class="btn-primary" onclick="showToast('📞 Conectando con el profesional más cercano…')">Solicitar urgente</button>
   </div>
 </div>
 
@@ -592,7 +390,6 @@
     <h2 class="section-title" id="prosTitle">Profesionales cerca tuyo</h2>
     <span class="section-link" onclick="clearFilter()">Ver todos →</span>
   </div>
-
   <div class="chip-bar" id="chipBar">
     <div class="chip active" onclick="filterBy(null, this)">Todos</div>
     <div class="chip" onclick="filterBy('cerrajeria', this)">🔑 Cerrajería</div>
@@ -601,44 +398,92 @@
     <div class="chip" onclick="filterBy('carpinteria', this)">🪚 Carpintería</div>
     <div class="chip" onclick="filterBy('pintura', this)">🖌️ Pintura</div>
     <div class="chip" onclick="filterBy('gasista', this)">🔥 Gasista</div>
+    <div class="chip" onclick="filterBy('jardineria', this)">🌿 Jardinería</div>
+    <div class="chip" onclick="filterBy('albanileria', this)">🧱 Albañilería</div>
   </div>
-
   <div class="swimlane" id="prosSwimlane"></div>
 </section>
 
 <!-- CÓMO FUNCIONA -->
 <section class="section">
-  <div class="section-header">
-    <h2 class="section-title">¿Cómo funciona?</h2>
-  </div>
+  <div class="section-header"><h2 class="section-title">¿Cómo funciona?</h2></div>
   <div class="how-grid">
-    <div class="how-card">
-      <div class="how-number">01</div>
-      <h4>Elegí el servicio</h4>
-      <p>Seleccioná qué tipo de trabajo necesitás y describí brevemente el problema. Sin formularios largos.</p>
-    </div>
-    <div class="how-card">
-      <div class="how-number">02</div>
-      <h4>Confirmá al profesional</h4>
-      <p>Ves el perfil, las calificaciones reales y el precio estimado antes de confirmar. Vos elegís.</p>
-    </div>
-    <div class="how-card">
-      <div class="how-number">03</div>
-      <h4>Listo, viene a tu casa</h4>
-      <p>Seguí la llegada en tiempo real y pagá una vez terminado el trabajo. Simple y seguro.</p>
-    </div>
+    <div class="how-card"><div class="how-number">01</div><h4>Elegí el servicio</h4><p>Seleccioná qué tipo de trabajo necesitás. Sin formularios largos, sin vueltas.</p></div>
+    <div class="how-card"><div class="how-number">02</div><h4>Contactá al profesional</h4><p>Llamá directamente o escribile por WhatsApp. Vos manejás los tiempos.</p></div>
+    <div class="how-card"><div class="how-number">03</div><h4>Listo, viene a tu casa</h4><p>Acordás el precio y el horario directo con el profesional. Simple y sin comisiones.</p></div>
   </div>
 </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalBox">
-    <h3 id="modalTitle">Ingresá tu dirección</h3>
-    <p id="modalDesc">Encontramos profesionales disponibles según tu zona.</p>
-    <input type="text" class="modal-input" id="modalInput" placeholder="Ej: Av. Vélez Sarsfield 869, Nueva Córdoba"/>
+<!-- MODAL AGREGAR NEGOCIO -->
+<div class="modal-overlay" id="modalAgregar" onclick="closeMod('modalAgregar', event)">
+  <div class="modal">
+    <h3>Publicar mi servicio</h3>
+    <p class="modal-sub">Completá tus datos y aparecés en ServiHogar. Es gratis.</p>
+
+    <div class="form-row">
+      <div class="field">
+        <label>Nombre completo *</label>
+        <input type="text" id="f_nombre" placeholder="Ej: Marcelo Ruiz"/>
+      </div>
+      <div class="field">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="f_telefono" placeholder="Ej: 3516001234"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>Oficio *</label>
+        <select id="f_oficio">
+          <option value="">— Elegí uno —</option>
+          <option value="cerrajeria">🔑 Cerrajería</option>
+          <option value="electricidad">⚡ Electricidad</option>
+          <option value="plomeria">🚿 Plomería</option>
+          <option value="carpinteria">🪚 Carpintería</option>
+          <option value="pintura">🖌️ Pintura</option>
+          <option value="gasista">🔥 Gasista</option>
+          <option value="jardineria">🌿 Jardinería</option>
+          <option value="albanileria">🧱 Albañilería</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Zona de trabajo</label>
+        <input type="text" id="f_zona" placeholder="Ej: Nueva Córdoba, Centro"/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Descripción breve</label>
+      <textarea id="f_desc" placeholder="Contá qué hacés, años de experiencia, especialidades…"></textarea>
+    </div>
+
+    <div class="field">
+      <label>¿Atendés urgencias 24 hs?</label>
+      <select id="f_urgencia">
+        <option value="no">No</option>
+        <option value="si">Sí, atiendo emergencias</option>
+      </select>
+    </div>
+
     <div class="modal-footer">
-      <button class="btn-ghost" onclick="closeModalDirect()">Cancelar</button>
-      <button class="btn-primary" onclick="confirmModal()">Confirmar</button>
+      <button class="btn-ghost" onclick="document.getElementById('modalAgregar').classList.remove('open')">Cancelar</button>
+      <button class="btn-primary" onclick="guardarNegocio()">Publicar ahora</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL UBICACIÓN -->
+<div class="modal-overlay" id="modalLocation" onclick="closeMod('modalLocation', event)">
+  <div class="modal">
+    <h3>Tu ubicación</h3>
+    <p class="modal-sub">Ingresá tu dirección para ver profesionales cerca tuyo.</p>
+    <div class="field">
+      <label>Dirección</label>
+      <input type="text" id="f_loc" placeholder="Ej: Av. Vélez Sarsfield 869, Nueva Córdoba"/>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="document.getElementById('modalLocation').classList.remove('open')">Cancelar</button>
+      <button class="btn-primary" onclick="guardarLocation()">Confirmar</button>
     </div>
   </div>
 </div>
@@ -654,137 +499,202 @@
 </footer>
 
 <script>
-  // ── DATOS ──
-  const PROS = [
-    { id:1, nombre:'Marcelo Ruiz',      oficio:'Cerrajero',     cat:'cerrajeria',   emoji:'🔑', estrellas:4.9, reviews:127, eta:'20 min', etaClass:'' },
-    { id:2, nombre:'Diego Ferreyra',    oficio:'Electricista',  cat:'electricidad', emoji:'⚡', estrellas:4.8, reviews:93,  eta:'35 min', etaClass:'' },
-    { id:3, nombre:'Gustavo López',     oficio:'Plomero',       cat:'plomeria',     emoji:'🚿', estrellas:4.7, reviews:214, eta:'25 min', etaClass:'' },
-    { id:4, nombre:'Pablo Sánchez',     oficio:'Carpintero',    cat:'carpinteria',  emoji:'🪚', estrellas:5.0, reviews:58,  eta:'55 min', etaClass:'far' },
-    { id:5, nombre:'Ana Villarreal',    oficio:'Cerrajera',     cat:'cerrajeria',   emoji:'🔑', estrellas:4.9, reviews:81,  eta:'15 min', etaClass:'' },
-    { id:6, nombre:'Roberto Cáceres',   oficio:'Gasista',       cat:'gasista',      emoji:'🔥', estrellas:4.6, reviews:44,  eta:'40 min', etaClass:'far' },
-    { id:7, nombre:'Laura Medina',      oficio:'Pintora',       cat:'pintura',      emoji:'🖌️', estrellas:4.8, reviews:102, eta:'2 hs',   etaClass:'far' },
-    { id:8, nombre:'Hernán Torres',     oficio:'Electricista',  cat:'electricidad', emoji:'⚡', estrellas:4.7, reviews:77,  eta:'30 min', etaClass:'' },
-    { id:9, nombre:'Carlos Bernaudo',   oficio:'Plomero',       cat:'plomeria',     emoji:'🚿', estrellas:4.5, reviews:163, eta:'45 min', etaClass:'far' },
-    { id:10,nombre:'Sofía Pereyra',     oficio:'Carpintera',    cat:'carpinteria',  emoji:'🪚', estrellas:4.9, reviews:39,  eta:'1 hs',   etaClass:'far' },
-  ];
+// ── EMOJIS POR CATEGORÍA ──
+const CAT_EMOJI = {
+  cerrajeria:'🔑', electricidad:'⚡', plomeria:'🚿',
+  carpinteria:'🪚', pintura:'🖌️', gasista:'🔥',
+  jardineria:'🌿', albanileria:'🧱'
+};
+const CAT_LABEL = {
+  cerrajeria:'Cerrajero/a', electricidad:'Electricista', plomeria:'Plomero/a',
+  carpinteria:'Carpintero/a', pintura:'Pintor/a', gasista:'Gasista',
+  jardineria:'Jardinero/a', albanileria:'Albañil'
+};
 
-  let activeFilter = null;
+// ── DATOS BASE (hardcoded) ──
+const PROS_BASE = [
+  { id:1,  nombre:'Marcelo Ruiz',    cat:'cerrajeria',   telefono:'3514001111', desc:'Apertura de emergencia, chapas de seguridad, duplicado de llaves.',   urgencia:'si', eta:'20 min', etaClass:'',    nuevo:false },
+  { id:2,  nombre:'Diego Ferreyra',  cat:'electricidad', telefono:'3514002222', desc:'Tableros, trifásicos, iluminación LED y termomagnéticas.',             urgencia:'no', eta:'35 min', etaClass:'',    nuevo:false },
+  { id:3,  nombre:'Gustavo López',   cat:'plomeria',     telefono:'3514003333', desc:'Pérdidas, destape hidro y mecánico, termotanques.',                    urgencia:'si', eta:'25 min', etaClass:'',    nuevo:false },
+  { id:4,  nombre:'Pablo Sánchez',   cat:'carpinteria',  telefono:'3514004444', desc:'Muebles a medida, deck, aberturas y marcos de madera.',                urgencia:'no', eta:'55 min', etaClass:'far', nuevo:false },
+  { id:5,  nombre:'Ana Villarreal',  cat:'cerrajeria',   telefono:'3514005555', desc:'20 años de experiencia. Chapas electrónicas y convencionales.',        urgencia:'si', eta:'15 min', etaClass:'',    nuevo:false },
+  { id:6,  nombre:'Roberto Cáceres', cat:'gasista',      telefono:'3514006666', desc:'Matriculado. Certificaciones, artefactos, estufas y salamandras.',     urgencia:'si', eta:'40 min', etaClass:'far', nuevo:false },
+  { id:7,  nombre:'Laura Medina',    cat:'pintura',      telefono:'3514007777', desc:'Texturado, frentes, interior y exterior. Presupuesto sin cargo.',      urgencia:'no', eta:'2 hs',   etaClass:'far', nuevo:false },
+  { id:8,  nombre:'Hernán Torres',   cat:'electricidad', telefono:'3514008888', desc:'Instalaciones domiciliarias y comerciales. Habilitaciones.',           urgencia:'no', eta:'30 min', etaClass:'',    nuevo:false },
+];
 
-  function renderPros(list) {
-    const el = document.getElementById('prosSwimlane');
-    el.innerHTML = list.map(p => `
-      <div class="pro-card" onclick="showToast('📋 Abriendo perfil de ${p.nombre}…')">
-        <div class="pro-avatar">${p.emoji}</div>
-        <div class="pro-name">${p.nombre}</div>
-        <div class="pro-trade">${p.oficio}</div>
-        <div class="pro-meta">
-          <span class="pro-stars">${'★'.repeat(Math.floor(p.estrellas))}</span>
-          <span class="pro-reviews">${p.estrellas} (${p.reviews})</span>
-          <span class="pro-eta ${p.etaClass}">${p.eta}</span>
+// ── CARGA DESDE localStorage ──
+function cargarPros() {
+  const guardados = JSON.parse(localStorage.getItem('servihogar_pros') || '[]');
+  return [...PROS_BASE, ...guardados];
+}
+
+let PROS = cargarPros();
+let activeFilter = null;
+
+// ── RENDER TARJETAS ──
+function renderPros(list) {
+  const el = document.getElementById('prosSwimlane');
+  if (!list.length) {
+    el.innerHTML = '<p style="color:var(--text-muted);padding:20px 0;font-size:14px;">No hay profesionales en esta categoría aún. ¡Publicá el tuyo!</p>';
+    return;
+  }
+  el.innerHTML = list.map(p => {
+    const emoji   = CAT_EMOJI[p.cat] || '🔧';
+    const label   = CAT_LABEL[p.cat] || p.cat;
+    const tel     = p.telefono.replace(/\D/g,'');
+    // WhatsApp: número argentino sin 0 ni 15, con código país 54 y 9
+    const waTel   = '549' + tel.replace(/^0?351/, '351');
+    const waMsg   = encodeURIComponent(`Hola ${p.nombre}, te contacto desde ServiHogar. Necesito un servicio de ${label}.`);
+    const stars   = p.estrellas ? '★'.repeat(Math.floor(p.estrellas)) + ` ${p.estrellas}` : '★★★★★ Nuevo';
+    const reviews = p.reviews   ? `(${p.reviews} reseñas)` : '';
+    const etaHtml = p.eta
+      ? `<span class="pro-eta ${p.etaClass || ''}">${p.eta}</span>`
+      : '';
+    const urgBadge = (p.urgencia === 'si')
+      ? '<span style="font-size:10px;color:var(--danger);font-weight:600;">🚨 24 hs</span>'
+      : '';
+    const nuevoTag = p.nuevo
+      ? '<span class="badge-nuevo">NUEVO</span>'
+      : '';
+
+    return `
+    <div class="pro-card ${p.nuevo ? 'nuevo' : ''}">
+      <div class="pro-top">
+        <div class="pro-avatar">${emoji}</div>
+        <div class="pro-info">
+          <div class="pro-name">${p.nombre} ${nuevoTag}</div>
+          <div class="pro-trade">${label} ${p.zona ? '· ' + p.zona : ''}</div>
         </div>
+        ${etaHtml}
       </div>
-    `).join('');
+      <div class="pro-stars-row">
+        <span class="pro-stars">${stars}</span>
+        <span class="pro-reviews">${reviews}</span>
+        ${urgBadge}
+      </div>
+      ${p.desc ? `<div class="pro-desc">${p.desc}</div>` : ''}
+      <div class="pro-actions">
+        <a class="btn-call" href="tel:${tel}">📞 Llamar</a>
+        <a class="btn-wsp" href="https://wa.me/${waTel}?text=${waMsg}" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── FILTROS ──
+function filterBy(cat, chipEl) {
+  activeFilter = cat;
+  const list = cat ? PROS.filter(p => p.cat === cat) : PROS;
+  renderPros(list);
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  if (chipEl) { chipEl.classList.add('active'); return; }
+  document.querySelectorAll('.chip').forEach(c => {
+    if (cat && c.textContent.toLowerCase().includes(cat.slice(0,5))) c.classList.add('active');
+    if (!cat && c.textContent.trim() === 'Todos') c.classList.add('active');
+  });
+}
+function clearFilter() { filterBy(null); }
+
+// ── BÚSQUEDA ──
+const toolEmojis = ['🔧','🔑','⚡','🚿','🪚','🔥','🖌️','🌿','🧱'];
+let toolIdx = 0;
+setInterval(() => {
+  toolIdx = (toolIdx+1) % toolEmojis.length;
+  document.getElementById('searchTool').textContent = toolEmojis[toolIdx];
+}, 1600);
+
+function handleSearch(val) {
+  const q = val.toLowerCase().trim();
+  if (!q) { renderPros(activeFilter ? PROS.filter(p=>p.cat===activeFilter) : PROS); return; }
+  const filtered = PROS.filter(p =>
+    p.nombre.toLowerCase().includes(q) ||
+    (CAT_LABEL[p.cat]||'').toLowerCase().includes(q) ||
+    p.cat.includes(q) ||
+    (p.desc||'').toLowerCase().includes(q) ||
+    (p.zona||'').toLowerCase().includes(q)
+  );
+  renderPros(filtered);
+}
+
+// ── GUARDAR NEGOCIO ──
+function guardarNegocio() {
+  const nombre   = document.getElementById('f_nombre').value.trim();
+  const telefono = document.getElementById('f_telefono').value.trim();
+  const cat      = document.getElementById('f_oficio').value;
+  const zona     = document.getElementById('f_zona').value.trim();
+  const desc     = document.getElementById('f_desc').value.trim();
+  const urgencia = document.getElementById('f_urgencia').value;
+
+  if (!nombre || !telefono || !cat) {
+    showToast('⚠️ Completá nombre, teléfono y oficio para continuar.');
+    return;
+  }
+  if (!/^\d{7,15}$/.test(telefono.replace(/[\s\-\(\)]/g,''))) {
+    showToast('⚠️ El teléfono debe tener solo números (sin espacios ni guiones).');
+    return;
   }
 
-  function filterBy(cat, chipEl) {
-    activeFilter = cat;
-    const filtered = cat ? PROS.filter(p => p.cat === cat) : PROS;
-    renderPros(filtered);
+  const nuevo = {
+    id: Date.now(),
+    nombre, telefono, cat, zona, desc, urgencia,
+    nuevo: true,
+    eta: null, etaClass: '',
+  };
 
-    // chips
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-    if (chipEl) chipEl.classList.add('active');
-    else {
-      // activar chip correspondiente
-      const chips = document.querySelectorAll('.chip');
-      chips.forEach(c => { if (c.textContent.toLowerCase().includes(cat || '')) c.classList.add('active'); });
-    }
+  const guardados = JSON.parse(localStorage.getItem('servihogar_pros') || '[]');
+  guardados.push(nuevo);
+  localStorage.setItem('servihogar_pros', JSON.stringify(guardados));
+
+  PROS = cargarPros();
+  renderPros(activeFilter ? PROS.filter(p=>p.cat===activeFilter) : PROS);
+
+  // limpiar form
+  ['f_nombre','f_telefono','f_zona','f_desc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f_oficio').value = '';
+  document.getElementById('f_urgencia').value = 'no';
+
+  document.getElementById('modalAgregar').classList.remove('open');
+  showToast('✅ ¡Servicio publicado! Ya aparecés en el listado.');
+
+  // scroll al swimlane
+  setTimeout(() => {
+    filterBy(cat);
+    document.getElementById('prosSwimlane').scrollIntoView({ behavior:'smooth', block:'center' });
+  }, 400);
+}
+
+// ── UBICACIÓN ──
+function openModal(which) {
+  if (which === 'agregar') document.getElementById('modalAgregar').classList.add('open');
+  if (which === 'location') document.getElementById('modalLocation').classList.add('open');
+}
+function guardarLocation() {
+  const v = document.getElementById('f_loc').value.trim();
+  if (v) {
+    document.getElementById('locationText').textContent = v;
+    showToast('📍 Ubicación guardada: ' + v);
   }
+  document.getElementById('modalLocation').classList.remove('open');
+}
+function closeMod(id, e) {
+  if (e.target === document.getElementById(id)) document.getElementById(id).classList.remove('open');
+}
 
-  function clearFilter() {
-    activeFilter = null;
-    renderPros(PROS);
-    document.querySelectorAll('.chip').forEach((c,i) => { c.classList.toggle('active', i===0); });
-  }
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3500);
+}
 
-  // búsqueda
-  const toolEmojis = ['🔧','🔑','⚡','🚿','🪚','🔥','🖌️'];
-  let toolIdx = 0;
-  setInterval(() => {
-    toolIdx = (toolIdx + 1) % toolEmojis.length;
-    document.getElementById('searchTool').textContent = toolEmojis[toolIdx];
-  }, 1600);
-
-  function handleSearch(val) {
-    const q = val.toLowerCase().trim();
-    if (!q) { renderPros(PROS); return; }
-    const filtered = PROS.filter(p =>
-      p.nombre.toLowerCase().includes(q) ||
-      p.oficio.toLowerCase().includes(q) ||
-      p.cat.includes(q)
-    );
-    renderPros(filtered.length ? filtered : PROS);
-  }
-
-  // ── MODAL ──
-  let modalMode = 'location';
-
-  function openModal(mode) {
-    modalMode = mode;
-    const titles = {
-      location: 'Ingresá tu dirección',
-      login:    'Iniciar sesión',
-      register: 'Publicar mi servicio',
-    };
-    const descs = {
-      location: 'Encontramos profesionales disponibles según tu zona.',
-      login:    'Accedé a tu cuenta para ver tus solicitudes.',
-      register: 'Completá tus datos para aparecer en ServiHogar.',
-    };
-    const placeholders = {
-      location: 'Ej: Av. Vélez Sarsfield 869, Nueva Córdoba',
-      login:    'Tu correo electrónico',
-      register: 'Nombre y oficio (Ej: Marcelo – Cerrajero)',
-    };
-    document.getElementById('modalTitle').textContent = titles[mode];
-    document.getElementById('modalDesc').textContent  = descs[mode];
-    document.getElementById('modalInput').placeholder = placeholders[mode];
-    document.getElementById('modalInput').value = '';
-    document.getElementById('modalOverlay').classList.add('open');
-  }
-
-  function confirmModal() {
-    const val = document.getElementById('modalInput').value.trim();
-    if (modalMode === 'location' && val) {
-      document.getElementById('locationText').textContent = val;
-      showToast('📍 Ubicación guardada: ' + val);
-    } else if (modalMode === 'register') {
-      showToast('✅ ¡Gracias! Tu solicitud fue enviada. Te contactamos pronto.');
-    } else if (modalMode === 'login') {
-      showToast('👋 ¡Bienvenido de nuevo!');
-    }
-    closeModalDirect();
-  }
-
-  function closeModal(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
-  }
-  function closeModalDirect() {
-    document.getElementById('modalOverlay').classList.remove('open');
-  }
-
-  // ── TOAST ──
-  let toastTimer;
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.display = 'block';
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3000);
-  }
-
-  // init
-  renderPros(PROS);
+// ── INIT ──
+renderPros(PROS);
 </script>
 </body>
 </html>
