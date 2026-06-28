@@ -3,234 +3,148 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ServiHogar – Oficios a domicilio</title>
+  <title>ServiHogar – Profesionales y Locales en tu Zona</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:#0F1923; --bg-card:#1C2A35; --bg-card2:#243444;
-      --accent:#F5A623; --accent2:#E8892A;
-      --text:#E8E4DC; --text-muted:#8A9BAD;
-      --border:#2C3E4E; --success:#3ECFA4; --danger:#E05A5A;
-      --whatsapp:#25D366; --radius:14px; --radius-sm:8px;
+      /* Paleta estilo PedidosYa (Fondo claro, rojo/rosado vibrante de acento, tipografía limpia) */
+      --bg: #F7F9FA;
+      --surface: #FFFFFF;
+      --primary: #E11A38; /* Rojo PedidosYa */
+      --primary-hover: #B8142C;
+      --accent-alpha: rgba(225, 26, 56, 0.08);
+      --text: #1E2329;
+      --text-muted: #657385;
+      --border: #E6E9ED;
+      --success: #00A650;
+      --shadow: opacity 0.1;
+      --radius: 16px;
+      --radius-sm: 8px;
     }
-    html { scroll-behavior:smooth; }
-    body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:14px; min-height:100vh; }
+    
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
     /* HEADER */
     header {
-      position:sticky; top:0; z-index:100;
-      background:rgba(15,25,35,0.95); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      height:68px; display:flex; align-items:center; padding:0 24px; gap:16px;
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
     }
-    .logo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.5px; white-space:nowrap; }
-    .logo span { color:var(--accent); }
-    .search-wrap { flex:1; max-width:520px; margin:0 auto; position:relative; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+    .logo span { color: var(--text); }
+    
+    .search-wrap { flex: 1; max-width: 480px; margin: 0 20px; position: relative; }
     .search-wrap input {
-      width:100%; background:var(--bg-card); border:1px solid var(--border);
-      border-radius:100px; height:42px; padding:0 48px 0 44px;
-      color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none; transition:border-color .2s;
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 100px; height: 44px; padding: 0 16px 0 44px;
+      color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: all .2s;
     }
-    .search-wrap input::placeholder { color:var(--text-muted); }
-    .search-wrap input:focus { border-color:var(--accent); }
-    .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
-    .search-tool {
-      position:absolute; right:8px; top:50%; transform:translateY(-50%);
-      width:28px; height:28px; background:var(--accent); border-radius:6px;
-      display:flex; align-items:center; justify-content:center; font-size:14px; cursor:pointer; user-select:none;
+    .search-wrap input:focus { border-color: var(--primary); background: var(--surface); box-shadow: 0 0 0 4px var(--accent-alpha); }
+    .search-icon { position:absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
+
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    
+    /* BOTONES */
+    .btn {
+      border-radius: 100px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; 
+      transition: all .2s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
     }
-    .header-actions { display:flex; align-items:center; gap:10px; white-space:nowrap; }
-    .btn-ghost {
-      background:none; border:1px solid var(--border); color:var(--text);
-      border-radius:100px; padding:8px 16px; font-size:13px; font-weight:500; cursor:pointer; transition:border-color .2s;
-    }
-    .btn-ghost:hover { border-color:var(--accent); }
-    .btn-primary {
-      background:var(--accent); border:none; color:#0F1923;
-      border-radius:100px; padding:8px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:background .2s;
-    }
-    .btn-primary:hover { background:var(--accent2); }
-    .btn-wsp {
-      background:var(--whatsapp); border:none; color:#fff;
-      border-radius:100px; padding:7px 14px; font-size:12px; font-weight:600;
-      cursor:pointer; display:flex; align-items:center; gap:5px; text-decoration:none; transition:opacity .2s;
-    }
-    .btn-wsp:hover { opacity:.85; }
-    .btn-call {
-      background:var(--bg-card2); border:1px solid var(--border); color:var(--text);
-      border-radius:100px; padding:7px 14px; font-size:12px; font-weight:600;
-      cursor:pointer; display:flex; align-items:center; gap:5px; text-decoration:none; transition:border-color .2s;
-    }
-    .btn-call:hover { border-color:var(--accent); color:var(--accent); }
+    .btn-primary { background: var(--primary); border: none; color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-wsp { background: #25D366; color: #fff; border: none; padding: 8px 14px; font-size: 13px; }
+    .btn-wsp:hover { opacity: 0.9; }
 
     /* HERO */
-    .hero {
-      padding:56px 24px 40px; max-width:1080px; margin:0 auto;
-      display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
-    }
-    .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent); }
-    .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(30px,5vw,54px); font-weight:800; line-height:1.1; letter-spacing:-1px; }
-    .hero h1 em { font-style:normal; color:var(--accent); }
-    .hero-sub { color:var(--text-muted); font-size:15px; max-width:460px; line-height:1.6; }
-    .location-bar {
-      display:flex; gap:10px; align-items:center; background:var(--bg-card);
-      border:1px solid var(--border); border-radius:var(--radius);
-      padding:12px 16px; width:100%; max-width:500px; margin-top:6px; cursor:pointer; transition:border-color .2s;
-    }
-    .location-bar:hover { border-color:var(--accent); }
-    .loc-icon { color:var(--accent); font-size:18px; }
-    .loc-text { flex:1; font-size:14px; color:var(--text-muted); }
-    .loc-cta { font-size:13px; font-weight:600; color:var(--accent); }
-    .trust { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
-    .trust-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); }
-    .trust-item .dot { color:var(--success); }
+    .hero { max-width: 1140px; margin: 0 auto; padding: 40px 24px 20px; text-align: center; }
+    .hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.8px; margin-bottom: 12px; }
+    .hero h1 em { font-style: normal; color: var(--primary); }
+    .hero p { color: var(--text-muted); font-size: 16px; margin-bottom: 24px; }
 
-    /* SECTION */
-    .section { max-width:1080px; margin:0 auto; padding:0 24px 48px; }
-    .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px; }
-    .section-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; }
-    .section-link { font-size:13px; color:var(--accent); font-weight:500; cursor:pointer; }
-    .section-link:hover { text-decoration:underline; }
+    /* SECCIONES Y CATEGORÍAS (Estilo Chips circulares de PedidosYa) */
+    .main-container { max-width: 1140px; margin: 0 auto; padding: 0 24px 60px; }
+    
+    .categories-slider { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 16px; scrollbar-width: none; }
+    .categories-slider::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      background: var(--surface); border: 1px solid var(--border); padding: 12px 20px;
+      border-radius: 100px; font-weight: 600; color: var(--text); cursor: pointer;
+      white-space: nowrap; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    }
+    .cat-chip:hover, .cat-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-    /* GRID SERVICIOS */
-    .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-    @media(max-width:768px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
-    .service-card {
-      background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-      padding:22px 16px 18px; display:flex; flex-direction:column; align-items:center;
-      gap:10px; text-align:center; cursor:pointer;
-      transition:border-color .2s, transform .2s, background .2s; position:relative; overflow:hidden;
-    }
-    .service-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:3px;
-      background:var(--card-color,var(--accent)); opacity:0; transition:opacity .2s;
-    }
-    .service-card:hover { border-color:var(--card-color,var(--accent)); transform:translateY(-3px); background:var(--bg-card2); }
-    .service-card:hover::before { opacity:1; }
-    .service-icon {
-      width:60px; height:60px; background:var(--icon-bg,rgba(245,166,35,.12));
-      border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:27px; transition:transform .2s;
-    }
-    .service-card:hover .service-icon { transform:scale(1.1) rotate(-4deg); }
-    .service-name { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
-    .service-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
-    .service-badge { background:rgba(62,207,164,.12); color:var(--success); border-radius:100px; padding:3px 10px; font-size:11px; font-weight:600; }
-    .service-badge.urgent { background:rgba(224,90,90,.12); color:var(--danger); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 24px 0 16px; letter-spacing: -0.3px; }
 
-    /* SWIMLANE */
-    .swimlane { display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; min-height:180px; }
-    .swimlane::-webkit-scrollbar { display:none; }
-    .pro-card {
-      min-width:230px; background:var(--bg-card); border:1px solid var(--border);
-      border-radius:var(--radius); padding:16px; flex-shrink:0;
-      display:flex; flex-direction:column; gap:10px; transition:border-color .2s, transform .2s;
+    /* REJILLA DE PROVEEDORES (Tarjetas Limpias estilo Delivery) */
+    .stores-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    
+    .store-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
+      transition: all .2s; box-shadow: 0 4px 12px rgba(0,0,0,0.01); position: relative;
     }
-    .pro-card:hover { transform:translateY(-2px); border-color:var(--accent); }
-    .pro-card.nuevo { border-color:var(--accent); }
-    .pro-top { display:flex; align-items:center; gap:10px; }
-    .pro-avatar {
-      width:46px; height:46px; border-radius:50%; background:var(--bg-card2);
-      display:flex; align-items:center; justify-content:center; font-size:20px;
-      border:2px solid var(--border); flex-shrink:0;
-    }
-    .pro-info { flex:1; min-width:0; }
-    .pro-name { font-weight:600; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .pro-trade { font-size:12px; color:var(--text-muted); }
-    .pro-eta { background:rgba(62,207,164,.12); color:var(--success); border-radius:6px; padding:2px 8px; font-size:11px; font-weight:600; white-space:nowrap; }
-    .pro-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
-    .pro-actions { display:flex; gap:8px; margin-top:2px; }
-    .pro-actions a { flex:1; justify-content:center; }
-    .badge-nuevo { background:rgba(245,166,35,.15); color:var(--accent); border-radius:4px; padding:2px 7px; font-size:10px; font-weight:700; }
-    .badge-urgencia { font-size:10px; color:var(--danger); font-weight:600; }
+    .store-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.05); border-color: var(--border); }
+    
+    .store-badge { position: absolute; top: 16px; right: 16px; background: var(--accent-alpha); color: var(--primary); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; }
+    .store-badge.urgent { background: #FFEBEB; color: var(--primary); }
 
-    /* BANNER */
-    .banner-urgencias { max-width:1080px; margin:0 auto 48px; padding:0 24px; }
-    .banner-inner {
-      background:linear-gradient(135deg,#1a0a00 0%,#2d1500 50%,#1C2A35 100%);
-      border:1px solid var(--accent2); border-radius:var(--radius);
-      padding:28px 32px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
-    }
-    .banner-icon { font-size:40px; }
-    .banner-text { flex:1; }
-    .banner-text h3 { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; margin-bottom:6px; }
-    .banner-text p { font-size:13px; color:var(--text-muted); line-height:1.5; }
-    .banner-text strong { color:var(--accent); }
+    .store-header { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+    .store-icon { width: 52px; height: 52px; background: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 1px solid var(--border); }
+    .store-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px; }
+    .store-meta { font-size: 12px; color: var(--text-muted); }
 
-    /* COMO FUNCIONA */
-    .how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    @media(max-width:640px){ .how-grid{grid-template-columns:1fr;} }
-    .how-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px 20px; }
-    .how-number { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--accent); opacity:.35; line-height:1; margin-bottom:12px; }
-    .how-card h4 { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; margin-bottom:6px; }
-    .how-card p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+    .store-body { margin-bottom: 16px; flex-grow: 1; }
+    .store-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
+    
+    .promo-box { background: #FFF9E6; border: 1px dashed #F5A623; color: #BC7A00; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+    .price-box { background: var(--bg); padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; color: var(--text); border: 1px solid var(--border); }
 
-    /* CHIPS */
-    .chip-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:18px; scrollbar-width:none; }
-    .chip-bar::-webkit-scrollbar { display:none; }
-    .chip {
-      white-space:nowrap; background:var(--bg-card); border:1px solid var(--border);
-      border-radius:100px; padding:6px 16px; font-size:13px; font-weight:500; cursor:pointer; transition:all .15s;
-    }
-    .chip:hover, .chip.active { background:var(--accent); border-color:var(--accent); color:#0F1923; }
+    /* ESTADOS */
+    .loading-state { text-align: center; padding: 40px; color: var(--text-muted); font-size: 15px; grid-column: 1/-1; }
+    .spinner { width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* LOADING */
-    .loading-state {
-      display:flex; align-items:center; gap:10px;
-      color:var(--text-muted); font-size:13px; padding:20px 0;
-    }
-    .spinner {
-      width:18px; height:18px; border:2px solid var(--border);
-      border-top-color:var(--accent); border-radius:50%;
-      animation:spin .7s linear infinite;
-    }
-    @keyframes spin { to{transform:rotate(360deg);} }
-
-    /* MODAL */
+    /* MODALES */
     .modal-overlay {
-      display:none; position:fixed; inset:0;
-      background:rgba(0,0,0,.75); backdrop-filter:blur(4px);
-      z-index:200; align-items:center; justify-content:center;
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center;
     }
-    .modal-overlay.open { display:flex; }
+    .modal-overlay.open { display: flex; }
     .modal {
-      background:var(--bg-card); border:1px solid var(--border);
-      border-radius:var(--radius); padding:28px; max-width:460px; width:92%;
-      animation:popIn .2s ease; max-height:90vh; overflow-y:auto;
+      background: var(--surface); border-radius: var(--radius); padding: 28px;
+      max-width: 500px; width: 92%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: slideUp 0.25s ease-out;
     }
-    @keyframes popIn { from{transform:scale(.94);opacity:0;} to{transform:scale(1);opacity:1;} }
-    .modal h3 { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin-bottom:6px; }
-    .modal-sub { font-size:13px; color:var(--text-muted); margin-bottom:20px; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    @media(max-width:480px){ .form-row{grid-template-columns:1fr;} }
-    .field { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
-    .field label { font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    .modal h3 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .modal p { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+    
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .field label { font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
     .field input, .field select, .field textarea {
-      background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm);
-      padding:10px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none; transition:border-color .2s; width:100%;
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 12px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: border .2s; width: 100%;
     }
-    .field input::placeholder, .field textarea::placeholder { color:var(--text-muted); }
-    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--accent); }
-    .field select { appearance:none; cursor:pointer; }
-    .field select option { background:var(--bg-card); }
-    .field textarea { resize:vertical; min-height:72px; }
-    .modal-footer { display:flex; gap:10px; justify-content:flex-end; margin-top:16px; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--primary); background: var(--surface); }
+    .field textarea { resize: vertical; min-height: 80px; }
+    
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media(max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    
+    .modal-footer { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
 
     /* TOAST */
-    .toast {
-      position:fixed; bottom:24px; right:24px;
-      background:var(--bg-card2); border:1px solid var(--accent);
-      border-radius:var(--radius-sm); padding:12px 18px;
-      font-size:13px; color:var(--text); z-index:300;
-      display:none; max-width:320px;
-    }
-    .toast.show { display:block; animation:slideUp .25s ease; }
-    @keyframes slideUp { from{transform:translateY(10px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1E2329; color: #fff; padding: 12px 24px; border-radius: 100px; font-weight: 500; font-size: 14px; z-index: 300; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .toast.show { display: block; }
 
-    footer { border-top:1px solid var(--border); padding:32px 24px; text-align:center; color:var(--text-muted); font-size:12px; line-height:2; }
-    footer strong { color:var(--text); }
-    @media(max-width:768px){ .header-actions .btn-ghost{display:none;} }
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+    @media(max-width: 768px) { .search-wrap { display: none; } }
   </style>
 </head>
 <body>
@@ -239,186 +153,97 @@
   <div class="logo">Servi<span>Hogar</span></div>
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Buscá un servicio o profesional…" oninput="handleSearch(this.value)"/>
-    <div class="search-tool" id="searchTool">🔧</div>
+    <input type="text" id="searchInput" placeholder="¿Qué servicio o local buscás hoy?" oninput="handleSearch(this.value)"/>
   </div>
   <div class="header-actions">
-    <button class="btn-ghost" onclick="openModal('location')">📍 Mi zona</button>
-    <button class="btn-primary" onclick="openModal('agregar')">+ Publicar servicio</button>
+    <button class="btn btn-outline" onclick="openModal('modalAgregar')">+ Registrar mi Negocio</button>
   </div>
 </header>
 
 <section class="hero">
-  <p class="hero-eyebrow">✦ Servicios para el hogar en Córdoba</p>
-  <h1>El profesional que<br/>necesitás, <em>ahora</em></h1>
-  <p class="hero-sub">Cerrajeros, electricistas, plomeros y carpinteros verificados cerca tuyo. Sin intermediarios, sin vueltas.</p>
-  <div class="location-bar" onclick="openModal('location')">
-    <span class="loc-icon">📍</span>
-    <span class="loc-text" id="locationText">¿Dónde necesitás el servicio?</span>
-    <span class="loc-cta">Cambiar</span>
-  </div>
-  <div class="trust">
-    <span class="trust-item"><span class="dot">●</span> Profesionales verificados</span>
-    <span class="trust-item"><span class="dot">●</span> Contacto directo sin intermediarios</span>
-    <span class="trust-item"><span class="dot">●</span> Sin costo de búsqueda</span>
-  </div>
+  <h1>El servicio que buscás, a <em>un WhatsApp</em> de distancia</h1>
+  <p>Encuentra electricistas, cerrajeros, locales de comida y mantenimiento rápido en tu zona universitaria.</p>
 </section>
 
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title">¿Qué necesitás?</h2>
-    <span class="section-link" onclick="clearFilter()">Ver todos →</span>
+<main class="main-container">
+  <div class="categories-slider">
+    <div class="cat-chip active" onclick="filterBy(null, this)">✨ Todos los rubros</div>
+    <div class="cat-chip" onclick="filterBy('comida', this)">🍔 Comida / Gastronomía</div>
+    <div class="cat-chip" onclick="filterBy('electricidad', this)">⚡ Electricistas</div>
+    <div class="cat-chip" onclick="filterBy('cerrajeria', this)">🔑 Cerrajerías</div>
+    <div class="cat-chip" onclick="filterBy('plomeria', this)">🚿 Plomeros</div>
+    <div class="cat-chip" onclick="filterBy('tecnico', this)">💻 Soporte Técnico / Celulares</div>
+    <div class="cat-chip" onclick="filterBy('varios', this)">📦 Kioscos / Varios</div>
   </div>
-  <div class="services-grid">
-    <div class="service-card" style="--card-color:#F5A623;--icon-bg:rgba(245,166,35,.12)" onclick="filterBy('cerrajeria')">
-      <div class="service-icon">🔑</div><div class="service-name">Cerrajería</div>
-      <div class="service-desc">Apertura de puertas, chapas, duplicado de llaves</div>
-      <span class="service-badge urgent">Urgencias 24 hs</span>
-    </div>
-    <div class="service-card" style="--card-color:#3ECFA4;--icon-bg:rgba(62,207,164,.12)" onclick="filterBy('electricidad')">
-      <div class="service-icon">⚡</div><div class="service-name">Electricidad</div>
-      <div class="service-desc">Instalaciones, tableros, iluminación, cortes de luz</div>
-      <span class="service-badge">Disponible hoy</span>
-    </div>
-    <div class="service-card" style="--card-color:#5B9BF5;--icon-bg:rgba(91,155,245,.12)" onclick="filterBy('plomeria')">
-      <div class="service-icon">🚿</div><div class="service-name">Plomería</div>
-      <div class="service-desc">Pérdidas, destape de cañerías, instalación sanitaria</div>
-      <span class="service-badge urgent">Urgencias 24 hs</span>
-    </div>
-    <div class="service-card" style="--card-color:#C97A3A;--icon-bg:rgba(201,122,58,.12)" onclick="filterBy('carpinteria')">
-      <div class="service-icon">🪚</div><div class="service-name">Carpintería</div>
-      <div class="service-desc">Muebles a medida, reparaciones, puertas y marcos</div>
-      <span class="service-badge">Programado</span>
-    </div>
-    <div class="service-card" style="--card-color:#A78BFA;--icon-bg:rgba(167,139,250,.12)" onclick="filterBy('pintura')">
-      <div class="service-icon">🖌️</div><div class="service-name">Pintura</div>
-      <div class="service-desc">Interior, exterior, texturado, frentes y locales</div>
-      <span class="service-badge">Disponible hoy</span>
-    </div>
-    <div class="service-card" style="--card-color:#F472B6;--icon-bg:rgba(244,114,182,.12)" onclick="filterBy('gasista')">
-      <div class="service-icon">🔥</div><div class="service-name">Gasista</div>
-      <div class="service-desc">Instalación de artefactos, pérdidas, certificaciones</div>
-      <span class="service-badge urgent">Urgencias 24 hs</span>
-    </div>
-    <div class="service-card" style="--card-color:#34D399;--icon-bg:rgba(52,211,153,.12)" onclick="filterBy('jardineria')">
-      <div class="service-icon">🌿</div><div class="service-name">Jardinería</div>
-      <div class="service-desc">Corte de césped, poda, diseño de jardines</div>
-      <span class="service-badge">Disponible hoy</span>
-    </div>
-    <div class="service-card" style="--card-color:#FB923C;--icon-bg:rgba(251,146,60,.12)" onclick="filterBy('albanileria')">
-      <div class="service-icon">🧱</div><div class="service-name">Albañilería</div>
-      <div class="service-desc">Reparaciones, revoques, construcción y reformas</div>
-      <span class="service-badge">Programado</span>
-    </div>
-  </div>
-</section>
 
-<div class="banner-urgencias">
-  <div class="banner-inner">
-    <div class="banner-icon">🚨</div>
-    <div class="banner-text">
-      <h3>¿Emergencia ahora mismo?</h3>
-      <p>Cerrajeros, gasistas y plomeros disponibles <strong>las 24 horas</strong>, los 365 días del año. Contacto directo con el profesional más cercano.</p>
-    </div>
-    <button class="btn-primary" onclick="filterBy('cerrajeria')">Ver urgencias →</button>
+  <h2 class="section-title" id="gridTitle">Destacados en tu zona</h2>
+  
+  <div class="stores-grid" id="storesContainer">
+    <div class="loading-state"><div class="spinner"></div> Buscando locales disponibles...</div>
   </div>
-</div>
+</main>
 
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title" id="prosTitle">Profesionales disponibles</h2>
-    <span class="section-link" onclick="clearFilter()">Ver todos →</span>
-  </div>
-  <div class="chip-bar">
-    <div class="chip active" onclick="filterBy(null,this)">Todos</div>
-    <div class="chip" onclick="filterBy('cerrajeria',this)">🔑 Cerrajería</div>
-    <div class="chip" onclick="filterBy('electricidad',this)">⚡ Electricidad</div>
-    <div class="chip" onclick="filterBy('plomeria',this)">🚿 Plomería</div>
-    <div class="chip" onclick="filterBy('carpinteria',this)">🪚 Carpintería</div>
-    <div class="chip" onclick="filterBy('pintura',this)">🖌️ Pintura</div>
-    <div class="chip" onclick="filterBy('gasista',this)">🔥 Gasista</div>
-    <div class="chip" onclick="filterBy('jardineria',this)">🌿 Jardinería</div>
-    <div class="chip" onclick="filterBy('albanileria',this)">🧱 Albañilería</div>
-  </div>
-  <div class="swimlane" id="prosSwimlane">
-    <div class="loading-state"><div class="spinner"></div> Cargando profesionales…</div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-header"><h2 class="section-title">¿Cómo funciona?</h2></div>
-  <div class="how-grid">
-    <div class="how-card"><div class="how-number">01</div><h4>Elegí el servicio</h4><p>Seleccioná qué tipo de trabajo necesitás. Sin formularios largos, sin vueltas.</p></div>
-    <div class="how-card"><div class="how-number">02</div><h4>Contactá al profesional</h4><p>Llamá directamente o escribile por WhatsApp. Vos manejás los tiempos.</p></div>
-    <div class="how-card"><div class="how-number">03</div><h4>Listo, viene a tu casa</h4><p>Acordás precio y horario directo con el profesional. Sin comisiones.</p></div>
-  </div>
-</section>
-
-<!-- MODAL AGREGAR -->
-<div class="modal-overlay" id="modalAgregar" onclick="closeMod('modalAgregar',event)">
+<div class="modal-overlay" id="modalAgregar" onclick="closeMod('modalAgregar', event)">
   <div class="modal">
-    <h3>Publicar mi servicio</h3>
-    <p class="modal-sub">Completá tus datos y aparecés para todos. Es gratis.</p>
+    <h3>Sumar mi Negocio / Servicio</h3>
+    <p>Completá los datos. Los clientes te contactarán directo a tu WhatsApp.</p>
+    
     <div class="form-row">
       <div class="field">
-        <label>Nombre completo *</label>
-        <input type="text" id="f_nombre" placeholder="Ej: Marcelo Ruiz"/>
+        <label>Nombre del Local o Profesional *</label>
+        <input type="text" id="f_nombre" placeholder="Ej: Hamburguesas Pepe / Juan Electricista"/>
       </div>
       <div class="field">
-        <label>Teléfono / WhatsApp *</label>
-        <input type="tel" id="f_telefono" placeholder="Ej: 3516001234"/>
+        <label>WhatsApp (Solo números) *</label>
+        <input type="tel" id="f_telefono" placeholder="Ej: 3516001234 (Sin 0 ni 15)"/>
       </div>
     </div>
+
     <div class="form-row">
       <div class="field">
-        <label>Oficio *</label>
-        <select id="f_oficio">
-          <option value="">— Elegí uno —</option>
-          <option value="cerrajeria">🔑 Cerrajería</option>
-          <option value="electricidad">⚡ Electricidad</option>
-          <option value="plomeria">🚿 Plomería</option>
-          <option value="carpinteria">🪚 Carpintería</option>
-          <option value="pintura">🖌️ Pintura</option>
-          <option value="gasista">🔥 Gasista</option>
-          <option value="jardineria">🌿 Jardinería</option>
-          <option value="albanileria">🧱 Albañilería</option>
+        <label>Rubro principal *</label>
+        <select id="f_rubro">
+          <option value="">— Seleccionar —</option>
+          <option value="comida">🍔 Comida / Gastronomía</option>
+          <option value="electricidad">⚡ Electricistas</option>
+          <option value="cerrajeria">🔑 Cerrajerías</option>
+          <option value="plomeria">🚿 Plomeros</option>
+          <option value="tecnico">💻 Soporte Técnico / Celulares</option>
+          <option value="varios">📦 Kioscos / Varios</option>
         </select>
       </div>
       <div class="field">
-        <label>Zona de trabajo</label>
+        <label>Zona de cobertura / Dirección</label>
         <input type="text" id="f_zona" placeholder="Ej: Nueva Córdoba, Centro"/>
       </div>
     </div>
+
     <div class="field">
-      <label>Descripción</label>
-      <textarea id="f_desc" placeholder="Contá qué hacés, años de experiencia, especialidades…"></textarea>
+      <label>¿Qué ofreces? (Breve descripción)</label>
+      <textarea id="f_desc" placeholder="Contá qué vendés o qué reparaciones hacés..."></textarea>
     </div>
+
     <div class="field">
-      <label>¿Atendés urgencias 24 hs?</label>
+      <label>Precios / Tarifas de Referencia</label>
+      <textarea id="f_precios" placeholder="Ej: Hamburguesa simple $4500 / Visita técnica $8000"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Promoción especial para Estudiantes (Opcional)</label>
+      <input type="text" id="f_promo" placeholder="Ej: 10% OFF los Miércoles presentando libreta"/>
+    </div>
+
+    <div class="field">
+      <label>¿Atendés Urgencias 24 hs?</label>
       <select id="f_urgencia">
-        <option value="no">No</option>
-        <option value="si">Sí, atiendo emergencias</option>
+        <option value="no">No, manejo horario comercial</option>
+        <option value="si">Sí, servicio de emergencia las 24hs</option>
       </select>
     </div>
-    <div class="modal-footer">
-      <button class="btn-ghost" onclick="document.getElementById('modalAgregar').classList.remove('open')">Cancelar</button>
-      <button class="btn-primary" id="btnPublicar" onclick="guardarNegocio()">Publicar ahora</button>
-    </div>
-  </div>
-</div>
 
-<!-- MODAL UBICACION -->
-<div class="modal-overlay" id="modalLocation" onclick="closeMod('modalLocation',event)">
-  <div class="modal">
-    <h3>Tu ubicación</h3>
-    <p class="modal-sub">Ingresá tu dirección para ver profesionales cerca tuyo.</p>
-    <div class="field">
-      <label>Dirección</label>
-      <input type="text" id="f_loc" placeholder="Ej: Av. Vélez Sarsfield 869, Nueva Córdoba"/>
-    </div>
     <div class="modal-footer">
-      <button class="btn-ghost" onclick="document.getElementById('modalLocation').classList.remove('open')">Cancelar</button>
-      <button class="btn-primary" onclick="guardarLocation()">Confirmar</button>
+      <button class="btn btn-outline" type="button" onclick="document.getElementById('modalAgregar').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-primary" id="btnPublicar" onclick="guardarNegocio()">Dar de alta negocio</button>
     </div>
   </div>
 </div>
@@ -426,188 +251,171 @@
 <div class="toast" id="toast"></div>
 
 <footer>
-  <strong>ServiHogar</strong> — Servicios para el hogar en Córdoba, Argentina<br/>
-  Cerrajería · Electricidad · Plomería · Carpintería · Pintura · Gasista · Jardinería · Albañilería<br/><br/>
-  <span style="opacity:.5">© 2025 ServiHogar. Todos los derechos reservados.</span>
+  <p><strong>ServiHogar</strong> — Inspirado en la comodidad de los estudiantes.</p>
+  <p style="opacity: 0.5; margin-top: 5px;">Plataforma conectada en tiempo real con Google Firebase.</p>
 </footer>
 
-<!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp }
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } 
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+  // Configuración oficial provista por vos
   const firebaseConfig = {
     apiKey: "AIzaSyC43DQO8rD0022-jr1v9Ev6kgkEAbLiddo",
     authDomain: "servicio-ece5d.firebaseapp.com",
     projectId: "servicio-ece5d",
     storageBucket: "servicio-ece5d.firebasestorage.app",
     messagingSenderId: "729691529118",
-    appId: "1:729691529118:web:7eeff9104496b7fb29c08f"
+    appId: "1:729691529118:web:7eeff9104496b7fb29c08f",
+    measurementId: "G-41RK12J4KK"
   };
 
   const app = initializeApp(firebaseConfig);
-  const db  = getFirestore(app);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
 
-  const CAT_EMOJI = {
-    cerrajeria:'🔑', electricidad:'⚡', plomeria:'🚿',
-    carpinteria:'🪚', pintura:'🖌️', gasista:'🔥',
-    jardineria:'🌿', albanileria:'🧱'
-  };
-  const CAT_LABEL = {
-    cerrajeria:'Cerrajero/a', electricidad:'Electricista', plomeria:'Plomero/a',
-    carpinteria:'Carpintero/a', pintura:'Pintor/a', gasista:'Gasista',
-    jardineria:'Jardinero/a', albanileria:'Albañil'
-  };
+  const RUBRO_EMOJI = { comida:'🍔', electricidad:'⚡', cerrajeria:'🔑', plomeria:'🚿', tecnico:'💻', varios:'📦' };
+  const RUBRO_LABEL = { comida:'Gastronomía', electricidad:'Electricista', cerrajeria:'Cerrajería', plomeria:'Plomería', tecnico:'Soporte Técnico', varios:'Negocio / Varios' };
 
-  let TODOS = [];
-  let activeFilter = null;
+  let TODOS_LOS_LOCALES = [];
+  let filtroActivo = null;
 
-  // ── RENDER ──
-  function renderPros(list) {
-    const el = document.getElementById('prosSwimlane');
+  // RENDERIZAR TARJETAS ESTILO PEDIDOSYA
+  function renderStores(list) {
+    const container = document.getElementById('storesContainer');
     if (!list.length) {
-      el.innerHTML = '<p style="color:var(--text-muted);padding:20px 0;font-size:14px;">No hay profesionales en esta categoría todavía. ¡Publicá el tuyo!</p>';
+      container.innerHTML = '<div class="loading-state">No se encontraron comercios o profesionales en este rubro todavía. ¡Sé el primero en registrarte!</div>';
       return;
     }
-    el.innerHTML = list.map(p => {
-      const emoji  = CAT_EMOJI[p.cat] || '🔧';
-      const label  = CAT_LABEL[p.cat] || p.cat;
-      const tel    = (p.telefono || '').replace(/\D/g,'');
-      const waTel  = '549' + tel;
-      const waMsg  = encodeURIComponent(`Hola ${p.nombre}, te contacto desde ServiHogar. Necesito un servicio de ${label}.`);
-      const urgBadge = p.urgencia === 'si' ? '<span class="badge-urgencia">🚨 24 hs</span>' : '';
-      const nuevoTag = p.esNuevo ? '<span class="badge-nuevo">NUEVO</span>' : '';
+
+    container.innerHTML = list.map(store => {
+      const emoji = RUBRO_EMOJI[store.rubro] || '🏪';
+      const label = RUBRO_LABEL[store.rubro] || store.rubro;
+      const limpiarTel = (store.telefono || '').replace(/\D/g, '');
+      const waLink = `https://wa.me/549${limpiarTel}?text=${encodeURIComponent(`Hola ${store.nombre}, vi tu local en ServiHogar. Te quería consultar por tus servicios.`)}`;
+      
       return `
-      <div class="pro-card ${p.esNuevo ? 'nuevo' : ''}">
-        <div class="pro-top">
-          <div class="pro-avatar">${emoji}</div>
-          <div class="pro-info">
-            <div class="pro-name">${p.nombre} ${nuevoTag}</div>
-            <div class="pro-trade">${label}${p.zona ? ' · '+p.zona : ''}</div>
+        <div class="store-card">
+          <div>
+            ${store.urgencia === 'si' ? '<span class="store-badge urgent">🚨 24 Horas</span>' : '<span class="store-badge">Abierto</span>'}
+            <div class="store-header">
+              <div class="store-icon">${emoji}</div>
+              <div>
+                <div class="store-name">${store.nombre}</div>
+                <div class="store-meta">${label} ${store.zona ? '• ' + store.zona : ''}</div>
+              </div>
+            </div>
+            
+            <div class="store-body">
+              ${store.desc ? `<p class="store-desc">${store.desc}</p>` : ''}
+              ${store.promociones ? `<div class="promo-box">🎁 Promo: ${store.promociones}</div>` : ''}
+              ${store.precios ? `<div class="price-box">💰 <strong>Tarifas aproximadas:</strong><br/>${store.precios.replace(/\n/g, '<br/>')}</div>` : ''}
+            </div>
+          </div>
+          
+          <div style="margin-top: 14px;">
+            <a href="${waLink}" target="_blank" class="btn btn-primary btn-wsp" style="width: 100%; justify-content: center;">
+               Pedir por WhatsApp
+            </a>
           </div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center;font-size:12px;">
-          <span style="color:var(--accent)">★★★★★</span>
-          ${urgBadge}
-        </div>
-        ${p.desc ? `<div class="pro-desc">${p.desc}</div>` : ''}
-        <div class="pro-actions">
-          <a class="btn-call" href="tel:${tel}">📞 Llamar</a>
-          <a class="btn-wsp" href="https://wa.me/${waTel}?text=${waMsg}" target="_blank">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            WhatsApp
-          </a>
-        </div>
-      </div>`;
+      `;
     }).join('');
   }
 
-  // ── ESCUCHAR FIRESTORE EN TIEMPO REAL ──
-  const q = query(collection(db, 'profesionales'), orderBy('creado', 'desc'));
+  // CONEXIÓN EN TIEMPO REAL CON FIRESTORE
+  // Nota: Si te da un error de índice al principio, usa la colección limpia sin el orderBy('creado') temporalmente.
+  const q = query(collection(db, 'profesionales')); 
   onSnapshot(q, (snapshot) => {
-    const ahora = Date.now();
-    TODOS = snapshot.docs.map(doc => {
-      const d = doc.data();
-      const ts = d.creado ? d.creado.toMillis() : 0;
-      return { id: doc.id, ...d, esNuevo: (ahora - ts) < 1000 * 60 * 60 * 24 };
-    });
-    const lista = activeFilter ? TODOS.filter(p => p.cat === activeFilter) : TODOS;
-    renderPros(lista);
+    TODOS_LOS_LOCALES = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    applyFilterAndSearch();
   });
 
-  // ── GUARDAR EN FIRESTORE ──
+  // GESTIÓN DE GUARDADO DE NUEVO NEGOCIO
   window.guardarNegocio = async function() {
-    const nombre   = document.getElementById('f_nombre').value.trim();
+    const nombre = document.getElementById('f_nombre').value.trim();
     const telefono = document.getElementById('f_telefono').value.trim();
-    const cat      = document.getElementById('f_oficio').value;
-    const zona     = document.getElementById('f_zona').value.trim();
-    const desc     = document.getElementById('f_desc').value.trim();
+    const rubro = document.getElementById('f_rubro').value;
+    const zona = document.getElementById('f_zona').value.trim();
+    const desc = document.getElementById('f_desc').value.trim();
+    const precios = document.getElementById('f_precios').value.trim();
+    const promociones = document.getElementById('f_promo').value.trim();
     const urgencia = document.getElementById('f_urgencia').value;
 
-    if (!nombre || !telefono || !cat) {
-      showToast('⚠️ Completá nombre, teléfono y oficio.');
-      return;
-    }
-    if (!/^\d{7,15}$/.test(telefono.replace(/[\s\-\(\)]/g,''))) {
-      showToast('⚠️ El teléfono debe tener solo números.');
+    if (!nombre || !telefono || !rubro) {
+      showToast('⚠️ Nombre, WhatsApp y Rubro son campos obligatorios.');
       return;
     }
 
     const btn = document.getElementById('btnPublicar');
-    btn.textContent = 'Publicando…'; btn.disabled = true;
+    btn.textContent = 'Procesando alta...'; btn.disabled = true;
 
     try {
       await addDoc(collection(db, 'profesionales'), {
-        nombre, telefono, cat, zona, desc, urgencia,
+        nombre, telefono, rubro, zona, desc, precios, promociones, urgencia,
         creado: serverTimestamp()
       });
-      ['f_nombre','f_telefono','f_zona','f_desc'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('f_oficio').value = '';
+
+      // Resetear formulario
+      ['f_nombre','f_telefono','f_zona','f_desc','f_precios','f_promo'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f_rubro').value = '';
       document.getElementById('f_urgencia').value = 'no';
+      
       document.getElementById('modalAgregar').classList.remove('open');
-      showToast('✅ ¡Servicio publicado! Ya te ven todos.');
-      filterBy(cat);
-    } catch(e) {
-      showToast('❌ Error al publicar. Intentá de nuevo.');
-      console.error(e);
+      showToast('✅ ¡Negocio registrado con éxito en la plataforma!');
+    } catch (error) {
+      showToast('❌ Error de conexión al guardar.');
+      console.error(error);
     }
-    btn.textContent = 'Publicar ahora'; btn.disabled = false;
+    btn.textContent = 'Dar de alta negocio'; btn.disabled = false;
   };
 
-  // ── FILTROS ──
-  window.filterBy = function(cat, chipEl) {
-    activeFilter = cat;
-    const lista = cat ? TODOS.filter(p => p.cat === cat) : TODOS;
-    renderPros(lista);
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-    if (chipEl) { chipEl.classList.add('active'); return; }
-    document.querySelectorAll('.chip').forEach(c => {
-      if (!cat && c.textContent.trim() === 'Todos') c.classList.add('active');
-      if (cat && c.textContent.toLowerCase().includes(cat.slice(0,5))) c.classList.add('active');
-    });
-  };
-  window.clearFilter = () => window.filterBy(null);
-
-  // ── BÚSQUEDA ──
-  window.handleSearch = function(val) {
-    const q = val.toLowerCase().trim();
-    if (!q) { renderPros(activeFilter ? TODOS.filter(p=>p.cat===activeFilter) : TODOS); return; }
-    renderPros(TODOS.filter(p =>
-      p.nombre.toLowerCase().includes(q) ||
-      (CAT_LABEL[p.cat]||'').toLowerCase().includes(q) ||
-      (p.desc||'').toLowerCase().includes(q) ||
-      (p.zona||'').toLowerCase().includes(q)
-    ));
+  // SISTEMA DE FILTRADO Y BÚSQUEDA COMBINADOS
+  window.filterBy = function(rubro, chipEl) {
+    filtroActivo = rubro;
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    if (chipEl) chipEl.classList.add('active');
+    applyFilterAndSearch();
   };
 
-  // ── TOOL EMOJI ROTANTE ──
-  const toolEmojis = ['🔧','🔑','⚡','🚿','🪚','🔥','🖌️','🌿','🧱'];
-  let ti = 0;
-  setInterval(() => { ti=(ti+1)%toolEmojis.length; document.getElementById('searchTool').textContent=toolEmojis[ti]; }, 1600);
+  window.handleSearch = function() {
+    applyFilterAndSearch();
+  };
 
+  function applyFilterAndSearch() {
+    const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+    let resultado = TODOS_LOS_LOCALES;
+
+    if (filtroActivo) {
+      resultado = resultado.filter(l => l.rubro === filtroActivo);
+    }
+    if (searchVal) {
+      resultado = resultado.filter(l => 
+        l.nombre.toLowerCase().includes(searchVal) || 
+        (l.desc && l.desc.toLowerCase().includes(searchVal)) ||
+        (l.zona && l.zona.toLowerCase().includes(searchVal))
+      );
+    }
+    renderStores(resultado);
+  }
 </script>
 
 <script>
-  // funciones no-module
-  function openModal(which) {
-    if (which==='agregar')  document.getElementById('modalAgregar').classList.add('open');
-    if (which==='location') document.getElementById('modalLocation').classList.add('open');
-  }
-  function guardarLocation() {
-    const v = document.getElementById('f_loc').value.trim();
-    if (v) { document.getElementById('locationText').textContent = v; showToast('📍 Ubicación guardada: '+v); }
-    document.getElementById('modalLocation').classList.remove('open');
-  }
-  function closeMod(id, e) {
-    if (e.target === document.getElementById(id)) document.getElementById(id).classList.remove('open');
-  }
+  // Funciones globales estructurales (Fuera del módulo de Firebase)
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeMod(id, e) { if (e.target === document.getElementById(id)) document.getElementById(id).classList.remove('open'); }
+  
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.className = 'toast show';
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { t.className = 'toast'; }, 3500);
+    toastTimer = setTimeout(() => { t.className = 'toast'; }, 4000);
   }
 </script>
 </body>
